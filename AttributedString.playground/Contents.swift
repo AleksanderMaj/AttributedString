@@ -1,5 +1,3 @@
-//: Playground - noun: a place where people can play
-
 import UIKit
 import PlaygroundSupport
 
@@ -21,11 +19,16 @@ let currencyAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 20)
 let integerAmountAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 30), NSForegroundColorAttributeName: UIColor.white]
 let decimalAmountAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 16), NSForegroundColorAttributeName: UIColor(white: 1, alpha: 0.7)]
 
+// set up formatter
+let formatter = NumberFormatter()
+formatter.numberStyle = NumberFormatter.Style.currency
+formatter.locale = Locale(identifier: "en_GB")
 
-let amount = 8001.90
-let text = String(format: "￡%.2f", amount)
+let amount = 8001.9
+let text = formatter.string(from: NSNumber(value: amount))!
 let nsText = text as NSString
 
+// calculate ranges
 let currencyRange = NSRange(location: 0, length: 1)
 let decimalPointRange = nsText.range(of: ".")
 var integerAmountLocation = currencyRange.location + currencyRange.length
